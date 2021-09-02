@@ -12,7 +12,8 @@ let gamestarted = false;
 let amountofWinBoxes = Math.floor(320);
 let amountofBadBoxes = Math.floor(120);
 let score = 0;
-const totalTime = 50;
+let totalTime = 50;
+let TimeDisplay = 50;
 
 window.onload = function () {
   beginGame();
@@ -57,28 +58,38 @@ AFRAME.registerComponent('minus-score', {
   }
 });
 
+AFRAME.registerComponent('update-score-every-second', {
+  init: function () {
+    const el = this.el;
+    setInterval(function () {
+      el.setAttribute('text', 'value', score.toString());
+    }, 1000);
+  }
+});
+
+AFRAME.registerComponent('update-time-every-second', {
+  init: function () {
+    const el = this.el;
+    setInterval(function () {
+      TimeDisplay--;
+      el.setAttribute('text', 'value', TimeDisplay.toString());
+    }, 1000);
+  }
+});
 
 function beginGame() {
   gamestarted = true;
   createWinBoxes(amountofWinBoxes);
   createBadBoxes(amountofBadBoxes);
-  console.log("Game Started");
-  const timeLeft = document.getElementById('timeLeft');
-  const playerScore = document.getElementById('playerScore');
-  timeLeft.innerHTML = totalTime.toString();
-  playerScore.innerHTML = score.toString();
   updateGameState(totalTime);
 }
 
 function updateGameState(totalTime) {
   setInterval(function () {
     totalTime--;
-    timeLeft.innerHTML = totalTime.toString();
-    playerScore.innerHTML = score.toString();
     if (totalTime === 0) {
       restart();
     }
-
   }, 1000);
 }
 
@@ -113,7 +124,6 @@ function createWinBoxes() {
     winbox.setAttribute('winbox', '');
     winbox.setAttribute('change-color-on-hover', 'color', 'green');
     winbox.setAttribute('class', 'winbox');
-    // winbox.setAttribute('material', 'src', 'img/static.jpg');
     winbox.setAttribute('animation', 'dur: 1200; easing: linear; loop: true; property: position; to:'+randPosX, randposY, randposZ);
     document.querySelector('a-scene').appendChild(winbox);
   }
@@ -139,7 +149,6 @@ function createBadBoxes() {
     badbox.setAttribute('badbox', '');
     badbox.setAttribute('minus-score', '');
     badbox.setAttribute('class', 'badbox');
-    // badbox.setAttribute('material', 'src', 'img/static.jpg');
     badbox.setAttribute('animation', 'dur: 1200; easing: linear; loop: true; property: position; to:'+randPosX, randposY, randposZ);
     document.querySelector('a-scene').appendChild(badbox);
   }
