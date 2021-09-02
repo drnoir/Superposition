@@ -3,47 +3,32 @@
 <head>
   <script src="https://js13kgames.com/webxr-src/2021/aframe.js"></script>
   <script src="main.js"></script>
-  <link rel="stylesheet" href="main.css"/>
   <meta charset="UTF-8">
-  <title>Superposition</title>
+  <title>Superposition VR</title>
 </head>
 <body>
 <!--Game Idea-->
-
+<!--SUPERPOSITION VR - The Player must attempt to reach a score of 80 point within a minute by observering the light blue -->
+<!--atoms and avoiding looking at the red atoms which deduct their score.-->
 <!--audio assets-->
 <audio id="score" src="sound/score.mp3"></audio>
 <audio id="lose" src="sound/lose.mp3"></audio>
-<a-scene  fog="type: linear; color: #000 density:0.15">
+<!--AFrame Scene with fog settings-->
+<a-scene  fog="type: linear; color: #000000 density:0.10">
+<!--  Lighting-->
   <a-entity light="type: point; intensity: 6; distance:700; decay: 2; color: #fff"
             position="0 50 -120">
   </a-entity>
-<!--  player -->
+<!--  player with curoser attached and text for UI -->
   <a-entity id="player" camera look-controls position="0 200 300" rotation="0 0 0">
-
     <a-cursor></a-cursor>
-    <a-entity text="value: SCORE; color: white; width: 2;" position="-0.5 -0.6 -1" >
-      <a-entity update-score-every-second text="value: 0; color: white; width: 4;" position="0.5 -0.6 -1" >
-      <a-entity text="value: TIME REMAINING; color: white; width: 4;" position="-2.5 -1 -1" >
-        <a-entity update-time-every-second text="value:50  ; color: white; width: 6;" position="1.5 -0.73 -1" >
+    <a-entity text="value: SCORE; color: white; width: 2;" position="-0.5 -0.6 -1" ></a-entity>
+      <a-entity update-score-every-second text="value: 0; color: white; width: 2;" position="0.5 -0.6 -1" ></a-entity>
+      <a-entity text="value: TIME REMAINING; color: white; width: 2;" position="-0.5 -0.75 -1" ></a-entity>
+        <a-entity update-time-every-second text="value:100  ; color: white; width: 2;" position="0.5 -0.73 -1" ></a-entity>
   </a-entity>
   <!--skybox-->
-  <a-sky color="#000" ></a-sky>
+  <a-sky color="#000000" ></a-sky>
 </a-scene>
-<!--&lt;!&ndash; The Modal &ndash;&gt;-->
-<!--<div id="myModal" class="modal">-->
-
-<!--  &lt;!&ndash; Modal content &ndash;&gt;-->
-<!--  <div class="modal-content">-->
-<!--    <h2>Begin the Game?</h2>-->
-<!--    <button id="myBtn">Start</button>-->
-<!--  </div>-->
-<!--<div class ="timer">-->
-<!--  Time Elapsed: <span id="timeLeft"></span> <span>Seconds</span>-->
-<!--</div>-->
-
-<!--<div class ="score">-->
-<!--  Score: <span id="playerScore"></span>-->
-<!--</div>-->
-</div>
 </body>
 </html>

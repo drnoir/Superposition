@@ -1,24 +1,28 @@
+// MAIN JS - CORE CUSTUM CODE FOR Superposition VR by Chris Godber
 
-// Get the modal
-// const modal = document.getElementById("myModal");
-// // Get the button that opens the modal
-// const btn = document.getElementById("myBtn");
-// // When the user clicks on <span> (x), close the modal
-// btn.onclick = function() {
-//   modal.style.display = "none";
-// }
-
+// Game variables
 let gamestarted = false;
-let amountofWinBoxes = Math.floor(320);
-let amountofBadBoxes = Math.floor(120);
+//green winspheres
+let amountofWinBoxes = Math.floor(620);
+// amount of red decrement scores spheres
+let amountofBadBoxes = Math.floor(240);
+//init score and game state variables
 let score = 0;
-let totalTime = 50;
-let TimeDisplay = 50;
+let totalTime = 80;
+let TimeDisplay = 100;
+//score to win game
+const winScore = 80;
+// boolean to prevent looping append of win message
+let winScoreShown = false;
 
+//run begin Game routines on new game started
 window.onload = function () {
   beginGame();
 };
 
+// AFRAME Componenets
+
+// change color and increment score on player gaze / mouse and reset on gaze / mouse leave
 AFRAME.registerComponent('change-color-on-hover', {
   schema: {
     color: {default: 'white'}
@@ -32,7 +36,6 @@ AFRAME.registerComponent('change-color-on-hover', {
     el.addEventListener('mouseenter', function () {
       score++;
       document.getElementById('score').play();
-      console.log(score);
       el.setAttribute('color', data.color);
     });
 
@@ -42,7 +45,7 @@ AFRAME.registerComponent('change-color-on-hover', {
   }
 });
 
-//reduce score by 1 if touch a blue cube
+// comonponent for minus score if gazing at a red sphere
 AFRAME.registerComponent('minus-score', {
   schema: {
   },
@@ -53,11 +56,11 @@ AFRAME.registerComponent('minus-score', {
     el.addEventListener('mouseenter', function () {
       score--;
       document.getElementById('lose').play();
-      console.log(score);
     });
   }
 });
 
+// update score to UI Text Componenet every second
 AFRAME.registerComponent('update-score-every-second', {
   init: function () {
     const el = this.el;
@@ -67,6 +70,7 @@ AFRAME.registerComponent('update-score-every-second', {
   }
 });
 
+// update time to UI Text Componenet every second
 AFRAME.registerComponent('update-time-every-second', {
   init: function () {
     const el = this.el;
@@ -77,6 +81,8 @@ AFRAME.registerComponent('update-time-every-second', {
   }
 });
 
+// Begin Game Loop - Genereate atoms normal and bad - and begin update GameState
+// to check for winconditions and update timer
 function beginGame() {
   gamestarted = true;
   createWinBoxes(amountofWinBoxes);
@@ -84,26 +90,51 @@ function beginGame() {
   updateGameState(totalTime);
 }
 
+//Checking for win conditional and decrement timer update every second
 function updateGameState(totalTime) {
   setInterval(function () {
+    // decrement timer
     totalTime--;
+    // check for game lose or win conditions
     if (totalTime === 0) {
       restart();
+    }
+    if (score>=winScore && winScoreShown == false) {
+      winMsg();
+      winScoreShown = true;
     }
   }, 1000);
 }
 
+//Function to restart game loop
 function restart() {
   location.reload();
 }
 
+// Utililty function to generate reandom int with min / max params
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+// Generate a win message on player getting to the set score
+function winMsg(){
+  let textWin = document.createElement('a-entity');
+  textWin.setAttribute('position', {x: 0.6, y: 0, z: -1});
+  textWin.setAttribute('text', 'value', 'YOU WON!', 'color', 'white', 'width','50');
+  document.getElementById('player').appendChild(textWin);
 
+  const scene = document.querySelector('a-scene')
+  // pause the game after win msg presented
+  scene.pause();
+  //restart game after 4 seconds
+  setInterval(function () {
+    restart();
+  }, 4000);
+}
+
+//function to generate good atoms with random positiong and animaions  with a for loop
 function createWinBoxes() {
   let i;
   for (i = 0; i < amountofWinBoxes; i++) {
@@ -129,6 +160,7 @@ function createWinBoxes() {
   }
 }
 
+//function to generate bad atoms with random positiong and animaions  with a for loop
 function createBadBoxes() {
   let i;
   for (i = 0; i < amountofBadBoxes; i++) {
@@ -153,5 +185,3 @@ function createBadBoxes() {
     document.querySelector('a-scene').appendChild(badbox);
   }
 }
-
-
