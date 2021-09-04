@@ -12,7 +12,7 @@ let totalTime = 80;
 let TimeDisplay = 100;
 //score to win game
 const winScore = 80;
-// boolean to prevent looping append of win message
+// boolean to prevent looping append of win message on win condition
 let winScoreShown = false;
 
 //run begin Game routines on new game started
@@ -111,7 +111,7 @@ function updateGameState(totalTime) {
 
 //Function to restart game loop
 function restart() {
-  window.location.reload();
+  window.location.pathname = '/index'
 }
 
 // Utililty function to generate reandom int with min / max params
