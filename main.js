@@ -3,9 +3,9 @@
 // Game variables
 let gamestarted = false;
 //green winspheres
-let amountofWinBoxes = Math.floor(620);
+let amountofWinBoxes = Math.floor(420);
 // amount of red decrement scores spheres
-let amountofBadBoxes = Math.floor(240);
+let amountofBadBoxes = Math.floor(340);
 //init score and game state variables
 let score = 0;
 let totalTime = 80;
@@ -17,6 +17,9 @@ let winScoreShown = false;
 
 //run begin Game routines on new game started
 window.onload = function () {
+  //enable VR mode by default
+  document.querySelector('a-scene').enterVR();
+  //setup and populate game scene
   beginGame();
 };
 
@@ -108,7 +111,7 @@ function updateGameState(totalTime) {
 
 //Function to restart game loop
 function restart() {
-  location.reload();
+  window.location.reload();
 }
 
 // Utililty function to generate reandom int with min / max params
@@ -139,14 +142,14 @@ function createWinBoxes() {
   let i;
   for (i = 0; i < amountofWinBoxes; i++) {
     let winbox = document.createElement('a-sphere');
-    let posx = getRandomInt(0,1000);
-    let posz = getRandomInt(0, 500);
-    let posy = getRandomInt(0, 800);
+    let posx = getRandomInt(-400,400);
+    let posz = getRandomInt(-550, 500);
+    let posy = getRandomInt(-400, 450);
     let scale = getRandomInt(8, 10);
 
-    let randPosX = getRandomInt(10, 250);
-    let randposZ = getRandomInt(200,1200);
-    let randposY = getRandomInt(1,250);
+    let randPosX = getRandomInt(-400, 400);
+    let randposZ = getRandomInt(-400,400);
+    let randposY = getRandomInt(1,450);
 
     winbox.setAttribute('position', {x: posx, y: posy, z: posz});
     winbox.object3D.scale.set(scale, scale, scale);
@@ -165,14 +168,14 @@ function createBadBoxes() {
   let i;
   for (i = 0; i < amountofBadBoxes; i++) {
     let badbox = document.createElement('a-sphere');
-    let posx = getRandomInt(0, 1000);
-    let posz = getRandomInt(0, 800);
-    let posy = getRandomInt(0, 500);
+    let posx = getRandomInt(-400,400);
+    let posz = getRandomInt(-550, 500);
+    let posy = getRandomInt(-400, 450);
     let scale = getRandomInt(8, 10);
 
-    let randPosX = getRandomInt(10, 250);
-    let randposZ = getRandomInt(200,1200);
-    let randposY = getRandomInt(1,250);
+    let randPosX = getRandomInt(-400, 400);
+    let randposZ = getRandomInt(-400,400);
+    let randposY = getRandomInt(1,450);
 
     badbox.setAttribute('position', {x: posx, y: posy, z: posz});
     badbox.object3D.scale.set(scale, scale, scale);
