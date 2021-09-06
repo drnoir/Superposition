@@ -18,7 +18,7 @@ AFRAME.registerComponent('start-game', {
 
     el.addEventListener('mouseenter', function () {
       el.setAttribute('color', data.color);
-      window.location.pathname = '/game'
+      window.location.pathname = 'game/main.html'
     });
 
     el.addEventListener('mouseleave', function () {

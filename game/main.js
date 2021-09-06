@@ -8,19 +8,19 @@ let amountofWinBoxes = Math.floor(420);
 let amountofBadBoxes = Math.floor(340);
 //init score and game state variables
 let score = 0;
-let totalTime = 80;
-let TimeDisplay = 100;
+let totalTime = 150;
+let TimeDisplay = 150;
 //score to win game
-const winScore = 80;
+const winScore = 100;
 // boolean to prevent looping append of win message on win condition
 let winScoreShown = false;
 
 //run begin Game routines on new game started
 window.onload = function () {
-  //enable VR mode by default
-  document.querySelector('a-scene').enterVR();
   //setup and populate game scene
   beginGame();
+  //enable VR mode by default
+  document.querySelector('a-scene').enterVR();
 };
 
 // AFRAME Componenets
@@ -111,7 +111,7 @@ function updateGameState(totalTime) {
 
 //Function to restart game loop
 function restart() {
-  window.location.pathname = '/index'
+  window.location.pathname = './index.html'
 }
 
 // Utililty function to generate reandom int with min / max params
@@ -125,7 +125,7 @@ function getRandomInt(min, max) {
 function winMsg(){
   let textWin = document.createElement('a-entity');
   textWin.setAttribute('position', {x: 0.6, y: 0, z: -1});
-  textWin.setAttribute('text', 'value', 'YOU WON!', 'color', 'white', 'width','50');
+  textWin.setAttribute('text', 'value', 'YOU WON!', 'color', 'white', 'width','80');
   document.getElementById('player').appendChild(textWin);
 
   const scene = document.querySelector('a-scene')
