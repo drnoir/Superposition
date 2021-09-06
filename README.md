@@ -1,5 +1,6 @@
-# SUPERPOSITION 3D
-![Image of Yaktocat](superpositionvr img.jpg)
+# SUPERPOSITION VR
+
+![Alt text](https://github.com/drnoir/Superposition/blob/main/superpositionvr%20img.jpg?raw=true "Superposition VR")
 
 ### Entry for Js13kGames 2021
 
