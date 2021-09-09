@@ -11,8 +11,8 @@ for the WebXR category
 Made with AFrame, HTML, JS
 
 ## Structure 
-- Index.html - entry point and associated JS - index.html and start.js 
-- Game - Game Files and sounds - main js and main.html are the main game files
+- Index.html - entry point and associated JS - index.html and main.js 
+- /sound - small compressed mp3 sound files
 
 ## Running Locally
 - install npm i http-server
