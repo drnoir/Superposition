@@ -19,8 +19,6 @@ let winScoreShown = false;
 window.onload = function () {
   //setup and populate game scene
   beginGame();
-  //enable VR mode by default
-  document.querySelector('a-scene').enterVR();
 };
 
 // AFRAME Componenets
