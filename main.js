@@ -109,7 +109,7 @@ function updateGameState(totalTime) {
 
 //Function to restart game loop
 function restart() {
-  window.location.pathname = './index.html'
+  location.reload();
 }
 
 // Utililty function to generate reandom int with min / max params
